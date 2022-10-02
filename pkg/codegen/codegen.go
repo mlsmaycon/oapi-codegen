@@ -30,6 +30,7 @@ import (
 )
 
 // Embed the templates directory
+//
 //go:embed templates
 var templates embed.FS
 
@@ -639,6 +640,9 @@ func GenerateEnums(t *template.Template, types []TypeDefinition) (string, error)
 			e2 := enums[j]
 
 			for e1key := range e1.GetValues() {
+				for e2Key := range e2.GetValues() {
+					fmt.Printf("e1key: %s e2key: %s\n", e1key, e2Key)
+				}
 				_, found := e2.GetValues()[e1key]
 				if found {
 					e1.PrefixTypeName = true
